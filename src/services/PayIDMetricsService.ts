@@ -68,6 +68,9 @@ export class PayIDMetricsService {
           if (err) {
             console.log('counter metrics push failed with ', err);
           }
+          else {
+            console.log('PayID Lookup Counter metrics pushed to gateway:' + this.metricsConfig.gatewayUrl);
+          }
         },
       );
 
@@ -83,9 +86,13 @@ export class PayIDMetricsService {
           if (err) {
             console.log('gauge metrics push failed with ', err);
           }
+          else {
+            console.log('PayID IDs Counter metrics pushed to gateway:' + this.metricsConfig.gatewayUrl);
+          }
         },
       );
     }, this.metricsConfig.pushIntervalInSeconds * 1000);
+    console.log('Started up pusher.  Interval=' + this.metricsConfig.pushIntervalInSeconds + ' seconds');
   }
 
   isPushMetricsEnabled(): boolean {
@@ -144,6 +151,8 @@ export class PayIDMetricsService {
       },
       count,
     );
+    console.log('Recorded PayID Count. Count=' + count + ', PaymentNetwork=' + paymentNetwork + ', Environment=' + environment);
+
   }
 
   /**
@@ -165,5 +174,7 @@ export class PayIDMetricsService {
       },
       1,
     );
+    console.log('Recorded PayID Lookup. Found=' + found + ', PaymentNetwork=' + paymentNetwork + ', Environment=' + environment);
+
   }
 }
